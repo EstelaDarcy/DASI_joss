@@ -1,6 +1,6 @@
 <%-- 
-    Document   : caca
-    Created on : 05-may-2017, 22:09:38
+    Document   : concesionario
+    Created on : 05-may-2017, 22:43:46
     Author     : Estela
 --%>
 
@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
-        <h1>Hello World!</h1>
+    <body>        
+        <a href="formulario.do">Annadir coche</a>  
     </body>
 </html>

@@ -15,15 +15,15 @@ public class Coche
     private String marca;
     private String modelo;
     private String color;
-    private String anno;
-    private String cilindrada;
-    private String caballos;
+    private int anno;
+    private int cilindrada;
+    private int caballos;
     private boolean vendido;
 
     public Coche() {
     }
 
-    public Coche(String matricula, String marca, String modelo, String color, String anno, String cilindrada, String caballos, boolean vendido) {
+    public Coche(String matricula, String marca, String modelo, String color, int anno, int cilindrada, int caballos, boolean vendido) {
         this.matricula = matricula;
         this.marca = marca;
         this.modelo = modelo;
@@ -66,27 +66,27 @@ public class Coche
         this.color = color;
     }
 
-    public String getAnno() {
+    public int getAnno() {
         return anno;
     }
 
-    public void setAnno(String anno) {
+    public void setAnno(int anno) {
         this.anno = anno;
     }
 
-    public String getCilindrada() {
+    public int getCilindrada() {
         return cilindrada;
     }
 
-    public void setCilindrada(String cilindrada) {
+    public void setCilindrada(int cilindrada) {
         this.cilindrada = cilindrada;
     }
 
-    public String getCaballos() {
+    public int getCaballos() {
         return caballos;
     }
 
-    public void setCaballos(String caballos) {
+    public void setCaballos(int caballos) {
         this.caballos = caballos;
     }
 

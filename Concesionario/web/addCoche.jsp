@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h2>Introduzca los datos del nuevo vehiculo</h2>
         <form action="addCoche.do" method="POST">                                  
             <b>Matricula:</b>
             <input type="text" name="matricula" value="${old.matricula}"/> ${errores['matricula']}<br/>

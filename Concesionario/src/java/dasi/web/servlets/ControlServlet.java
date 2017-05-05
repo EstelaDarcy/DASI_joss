@@ -8,8 +8,11 @@ package dasi.web.servlets;
 
 import dasi.web.exceptions.ConcesionarioException;
 import dasi.web.forms.FormularioCoche;
+import dasi.web.forms.FormularioModificarCoche;
+import dasi.web.modelo.Coche;
 import dasi.web.modelo.Dao;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,31 +47,36 @@ public class ControlServlet extends HttpServlet
         String url = request.getServletPath();
         
         switch(url)
-        {
-            
+        {           
             case "/modificarCoche.do":
                 doModificarCoche(request, response);
                 break;
             case "/deleteCoche.do":
-                doModificarCoche(request, response);
+                
                 break;
             case "/coche.do":
-                doModificarCoche(request, response);
+                
                 break;
             case "/vender.do":
-                doModificarCoche(request, response);
+                
                 break;
-            case "/modificarCoche2.do":
-                doModificarCoche(request, response);
+            case "/datosCoche.do":
+                doDatosCoche(request, response);
+                break;
+            case "/formulario.do":
+                doFormulario(request, response);
                 break;
             case "/vendidos.do":
-                doModificarCoche(request, response);
+                
                 break;
             case "/coches.do":
-                doModificarCoche(request, response);
+                
                 break;
             case "/addCoche.do":
                 doAddCoche(request, response);
+                break;
+            case "/concesionario.do":
+                doConcesionario(request, response);
                 break;
         }
     }
@@ -131,12 +139,11 @@ public class ControlServlet extends HttpServlet
             try{
             Dao dao = getDao();
             dao.addCoche(formulario.getMatricula(), formulario.getMarca(), formulario.getModelo(), formulario.getColor(), Integer.parseInt(formulario.getAnno()), Integer.parseInt(formulario.getCilindrada()), Integer.parseInt(formulario.getCaballos()));
-            request.getRequestDispatcher("/index.html").forward(request, response);                
+            request.getRequestDispatcher("/concesionario.jsp").forward(request, response);                
             } catch (ConcesionarioException ex) {
                 Logger.getLogger(ControlServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else{
-            
+        }else{            
             request.setAttribute("errores", errores);
             request.setAttribute("old", formulario);
             request.getRequestDispatcher("/addCoche.jsp").forward(request, response);
@@ -145,12 +152,57 @@ public class ControlServlet extends HttpServlet
 
     private void doModificarCoche(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        request.getRequestDispatcher("/prueba.jsp").forward(request, response);
+        String matricula = request.getParameter("matricula");
+        
+        FormularioModificarCoche formulario = new FormularioModificarCoche();                     
+        
+        formulario.setMarca(request.getParameter("marca"));
+        formulario.setModelo(request.getParameter("modelo"));
+        formulario.setColor(request.getParameter("color"));
+        formulario.setAnno(request.getParameter("anno"));
+        formulario.setCilindrada(request.getParameter("cilindrada"));
+        formulario.setCaballos(request.getParameter("caballos"));
+        
+        Map<String, String> errores = formulario.correcto();
+        
+        if(errores.isEmpty())
+        {
+            try{
+            Dao dao = getDao();
+            dao.modificarCoche(matricula, formulario.getMarca(), formulario.getModelo(), formulario.getColor(), Integer.parseInt(formulario.getAnno()), Integer.parseInt(formulario.getCilindrada()), Integer.parseInt(formulario.getCaballos()));
+            request.getRequestDispatcher("/concesionario.jsp").forward(request, response);                
+            } catch (ConcesionarioException ex) {
+                Logger.getLogger(ControlServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{            
+            request.setAttribute("errores", errores);
+            request.setAttribute("old", formulario);
+            request.getRequestDispatcher("/modificarCoche.jsp").forward(request, response);
+        }
     }
 
-    private void doHola(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    private void doFormulario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/addCoche.jsp").forward(request, response);
+    }
+
+    private void doConcesionario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/concesionario.jsp").forward(request, response);
+    }
+
+    private void doDatosCoche(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        request.getRequestDispatcher("/prueba.jsp").forward(request, response);
+        String matricula = request.getParameter("matricula");
+        try 
+        {            
+            Dao dao = getDao();
+            Coche coche = dao.mostrarFormulario(matricula);            
+                        
+            request.setAttribute("coche", coche);           
+            request.getRequestDispatcher("/modificarCoche.jsp").forward(request, response);
+     
+        } catch (ConcesionarioException ex) {
+            Logger.getLogger(ControlServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

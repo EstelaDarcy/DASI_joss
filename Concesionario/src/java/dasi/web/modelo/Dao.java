@@ -16,4 +16,6 @@ public interface Dao
 {
     public void init(DataSource dataSource);
     public void addCoche(String matricula, String marca, String modelo, String color, int anno, int cilindrada, int caballos) throws ConcesionarioException;
+    public Coche mostrarFormulario(String matricula) throws ConcesionarioException;
+    public void modificarCoche(String matricula, String marca, String modelo, String color, int anno, int cilindrada, int caballos) throws ConcesionarioException; 
 }
