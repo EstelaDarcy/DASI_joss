@@ -5,12 +5,15 @@
  */
 package dasi.web.servlets;
 
-import dasi.web.beans.Dao;
+
 import dasi.web.exceptions.ConcesionarioException;
 import dasi.web.forms.FormularioCoche;
+import dasi.web.modelo.Dao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
@@ -23,14 +26,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Estela
  */
-public class ControlServlet2 extends HttpServlet {
-
+public class ControlServlet extends HttpServlet 
+{
     private Dao getDao()
     {
         ServletContext servletContext = getServletContext();
         return (Dao) servletContext.getAttribute("dao");
-    }
-    
+    }  
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,8 +42,7 @@ public class ControlServlet2 extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException 
     {
         String url = request.getServletPath();
         
@@ -109,8 +110,8 @@ public class ControlServlet2 extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    private void doAddCoche(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+
+     private void doAddCoche(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
         FormularioCoche formulario = new FormularioCoche();               
         
@@ -145,4 +146,5 @@ public class ControlServlet2 extends HttpServlet {
     {
         request.getRequestDispatcher("/prueba.jsp").forward(request, response);
     }
+
 }

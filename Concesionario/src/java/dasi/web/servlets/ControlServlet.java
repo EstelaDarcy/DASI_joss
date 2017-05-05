@@ -5,17 +5,16 @@
  */
 package dasi.web.servlets;
 
-import dasi.web.beans.Dao;
+
 import dasi.web.exceptions.ConcesionarioException;
 import dasi.web.forms.FormularioCoche;
+import dasi.web.modelo.Dao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,15 +23,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Estela
  */
-
 public class ControlServlet extends HttpServlet 
 {
     private Dao getDao()
     {
         ServletContext servletContext = getServletContext();
         return (Dao) servletContext.getAttribute("dao");
-    }
-    
+    }  
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,32 +39,36 @@ public class ControlServlet extends HttpServlet
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException 
     {
         String url = request.getServletPath();
         
         switch(url)
         {
-            case "/vendidos.do":
-                
-                break;
-            case "/coches.do":
-                
-                break;
-            case "/addCoche.do":
-                doAddCoche(request, response);
-                break;
+            
             case "/modificarCoche.do":
                 doModificarCoche(request, response);
                 break;
             case "/deleteCoche.do":
-                
+                doModificarCoche(request, response);
                 break;
             case "/coche.do":
-                
+                doModificarCoche(request, response);
                 break;
             case "/vender.do":
-                
+                doModificarCoche(request, response);
+                break;
+            case "/modificarCoche2.do":
+                doModificarCoche(request, response);
+                break;
+            case "/vendidos.do":
+                doModificarCoche(request, response);
+                break;
+            case "/coches.do":
+                doModificarCoche(request, response);
+                break;
+            case "/addCoche.do":
+                doAddCoche(request, response);
                 break;
         }
     }
@@ -111,7 +112,7 @@ public class ControlServlet extends HttpServlet
         return "Short description";
     }// </editor-fold>
 
-    private void doAddCoche(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+     private void doAddCoche(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
         FormularioCoche formulario = new FormularioCoche();               
         
@@ -143,6 +144,11 @@ public class ControlServlet extends HttpServlet
     }
 
     private void doModificarCoche(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    {
+        request.getRequestDispatcher("/prueba.jsp").forward(request, response);
+    }
+
+    private void doHola(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
         request.getRequestDispatcher("/prueba.jsp").forward(request, response);
     }

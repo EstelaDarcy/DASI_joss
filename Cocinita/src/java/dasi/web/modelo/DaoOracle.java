@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dasi.web.beans;
+package dasi.web.modelo;
 
 import dasi.web.exceptions.ConcesionarioException;
 import dasi.web.exceptions.addCocheException;
