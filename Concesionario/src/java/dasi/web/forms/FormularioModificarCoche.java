@@ -125,7 +125,7 @@ public class FormularioModificarCoche
                 Integer.parseInt(anno);
             }catch(Exception ex)
             {
-                errores.put("caballos", "Los caballos del vahiculo deben ser numericos (0-9)");
+                errores.put("caballos", "Los caballos del vehiculo deben ser numericos (0-9)");
             }
         }        
         return errores;

@@ -8,12 +8,15 @@ package dasi.web.modelo;
 import dasi.web.exceptions.ConcesionarioException;
 import dasi.web.exceptions.AddCocheException;
 import dasi.web.exceptions.ModificarCocheException;
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.CallableStatement;
+import java.sql.Statement;
 import java.sql.Types;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sql.DataSource;
@@ -75,10 +78,37 @@ public class DaoOracle implements Dao
         } catch (SQLException ex) {
             throw new ModificarCocheException();
         }
-        
-        
     }
-
+    
+     @Override
+    public List<Coche> listarCoches() throws ConcesionarioException 
+    {
+        Coche coche;
+        List<Coche> coches = new LinkedList<>();
+        
+        try(Connection connection = dataSource.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(  "SELECT C.MARCA, C.MODELO, C.ANNO "
+                                                         + "  FROM COCHES C                  ")
+        )
+        {
+            if ( resultSet.next() )
+            {
+                do
+                {
+                    coche = new Coche();
+                    coche.setMarca(resultSet.getString(1) );
+                    coche.setModelo(resultSet.getString(2) );
+                    coche.setAnno(resultSet.getInt(3) );                                        
+                    coches.add(coche);
+                    
+                } while ( resultSet.next() );
+            }
+        }catch (SQLException sqlException) { throw new ConcesionarioException(sqlException); }
+        
+        return coches;
+    }    
+    
     @Override
     public Coche mostrarFormulario(String matricula) throws ConcesionarioException 
     {

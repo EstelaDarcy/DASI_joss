@@ -6,6 +6,7 @@
 package dasi.web.modelo;
 
 import dasi.web.exceptions.ConcesionarioException;
+import java.util.List;
 import javax.sql.DataSource;
 
 /**
@@ -18,4 +19,5 @@ public interface Dao
     public void addCoche(String matricula, String marca, String modelo, String color, int anno, int cilindrada, int caballos) throws ConcesionarioException;
     public Coche mostrarFormulario(String matricula) throws ConcesionarioException;
     public void modificarCoche(String matricula, String marca, String modelo, String color, int anno, int cilindrada, int caballos) throws ConcesionarioException; 
+    public List<Coche> listarCoches() throws ConcesionarioException; 
 }

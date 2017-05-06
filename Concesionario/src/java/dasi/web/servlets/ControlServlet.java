@@ -70,7 +70,7 @@ public class ControlServlet extends HttpServlet
                 
                 break;
             case "/coches.do":
-                
+                doListarCoches(request, response);
                 break;
             case "/addCoche.do":
                 doAddCoche(request, response);
@@ -203,6 +203,10 @@ public class ControlServlet extends HttpServlet
         } catch (ConcesionarioException ex) {
             Logger.getLogger(ControlServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void doListarCoches(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
