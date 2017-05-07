@@ -9,24 +9,24 @@ package dasi.web.exceptions;
  *
  * @author Estela
  */
-public class addCocheException extends ConcesionarioException
+public class AddCocheException extends ConcesionarioException
 {
-    public addCocheException() {
+    public AddCocheException() {
     }
 
-    public addCocheException(String string) {
+    public AddCocheException(String string) {
         super(string);
     }
 
-    public addCocheException(String string, Throwable thrwbl) {
+    public AddCocheException(String string, Throwable thrwbl) {
         super(string, thrwbl);
     }
 
-    public addCocheException(Throwable thrwbl) {
+    public AddCocheException(Throwable thrwbl) {
         super(thrwbl);
     }
 
-    public addCocheException(String string, Throwable thrwbl, boolean bln, boolean bln1) {
+    public AddCocheException(String string, Throwable thrwbl, boolean bln, boolean bln1) {
         super(string, thrwbl, bln, bln1);
     }
     
