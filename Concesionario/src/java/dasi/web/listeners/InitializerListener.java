@@ -24,7 +24,7 @@ public class InitializerListener implements ServletContextListener {
     
     @Resource(lookup = "jdbc/cocinita")
     private DataSource dataSource;
-    
+     
     @Override
     public void contextInitialized(ServletContextEvent sce) 
     {
